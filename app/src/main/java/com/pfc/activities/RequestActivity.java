@@ -38,6 +38,7 @@ import com.pfc.ui.requestfrag.NewRequestFragment;
 import com.pfc.warehouse.Constants;
 import com.pfc.warehouse.EnumPermission;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -118,6 +119,8 @@ public class RequestActivity extends AppCompatActivity {
                     rq.setCreationDate(doc.getTimestamp("CreationDate"));
                     return rq;
                 })
+                //.filter(Request::isStatus)
+                .sorted(Comparator.comparing(Request::getCreationDate))
                 .collect(Collectors.toList());
 
         showMeTheList(listReq);

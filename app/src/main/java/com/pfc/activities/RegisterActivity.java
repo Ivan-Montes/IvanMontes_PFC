@@ -2,7 +2,6 @@ package com.pfc.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -77,7 +76,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                 }else{
                     DialogBox.dialogErrorProcess( getApplication().getApplicationContext() );
-                    Log.w("createUserWithEmailAndPassword:failure", task.getException());
                 }
             });
 

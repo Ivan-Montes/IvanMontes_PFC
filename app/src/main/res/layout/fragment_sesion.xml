@@ -15,11 +15,11 @@
             android:id="@+id/btChPass"
             android:layout_width="255dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             android:text="@string/ch_paswd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tvSuggSign" />
 
         <Button
             android:id="@+id/btLogout"
@@ -29,27 +29,27 @@
             android:text="@string/cerrar_sesion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btChPass" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btDeleteUser"
             android:layout_width="255dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="25dp"
             android:text="@string/delete_user"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btLogout" />
+            app:layout_constraintTop_toBottomOf="@+id/btChPass" />
 
         <TextView
             android:id="@+id/tvSuggSign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="55dp"
             android:text="@string/sugg_logout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btDeleteUser" />
+            app:layout_constraintTop_toBottomOf="@+id/btLogout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

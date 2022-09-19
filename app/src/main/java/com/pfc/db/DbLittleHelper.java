@@ -20,6 +20,7 @@ public interface DbLittleHelper {
      void deleteRestUserData(FirebaseUser user);
      void addAvatarDownloadLink(FirebaseUser user, Uri downloadUrl);
      void getCollection(String collection, FirestoreCallbackListCollection callback);
+     void getCollectionWarn(String collection, FirestoreCallbackListCollection callback);
      void addRequest(Map<String, Object> mapNewRequest, FirestoreCallbackBool callback);
 
 }

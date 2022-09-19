@@ -54,7 +54,7 @@
     <string name="delete_user">Delete User</string>
     <string name="log_again">Confirm log in please</string>
     <string name="ch_paswd">Set Password</string>
-    <string name="sugg_logout">For this section it\'s mandatory to sign in again</string>
+    <string name="sugg_logout">For this part it\'s mandatory to sign in again</string>
     <string name="yes">Yes</string>
     <string name="areyousure">Are you sure?</string>
     <string name="testing">Testing</string>

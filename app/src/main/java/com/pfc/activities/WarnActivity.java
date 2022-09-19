@@ -70,7 +70,7 @@ public class WarnActivity extends AppCompatActivity {
 
         DbLittleHelper dbLittleHelper = DbLittleHelperFactory.getDbLittleHelper(DbLittleHelperFactory.FIRE);
         if (dbLittleHelper != null){
-            dbLittleHelper.getCollection("Warnings", this::preparetWarningList);
+            dbLittleHelper.getCollectionWarn("Warnings", this::preparetWarningList);
         }
     }
 
@@ -96,7 +96,7 @@ public class WarnActivity extends AppCompatActivity {
                             .setTipo(tipo)
                             .setIdDoc(doc.getId())
                             .build();
-                })
+                }).filter(w->w.isActivo())
                 .collect(Collectors.toList());
 
         showWarningList(listWarn);

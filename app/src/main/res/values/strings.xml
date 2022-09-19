@@ -57,7 +57,7 @@
     <string name="delete_user">Borrar Usuario</string>
     <string name="log_again">Vuelga a logarse por favor</string>
     <string name="ch_paswd">Cambiar Contraseña</string>
-    <string name="sugg_logout">Para usar esta sección se recomienda autenticarse de nuevo</string>
+    <string name="sugg_logout">Para usar esta parte se recomienda autenticarse de nuevo</string>
     <string name="yes">Si</string>
     <string name="areyousure">¿Está segur@ de borrar el usuario?</string>
     <string name="testing">En pruebas</string>

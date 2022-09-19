@@ -152,6 +152,26 @@ public class FireDbLittleHelper implements DbLittleHelper{
     }
 
     @Override
+    public void getCollectionWarn(String collection, FirestoreCallbackListCollection callback) {
+
+        db.collection(collection)
+                .orderBy("FechaInicio")
+                .get()
+                .addOnCompleteListener( task -> {
+                        if (task.isSuccessful()) {
+                            List<QueryDocumentSnapshot> listResult = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                listResult.add(document);
+                            }
+                            callback.onCallback(listResult);
+                        } else {
+                            Log.e(TAG, Objects.requireNonNull(task.getException()).getMessage()
+                                    + " : " + task.getException().getCause());
+                        }
+                });
+    }
+
+    @Override
     public void addRequest(Map<String, Object> mapNewRequest, FirestoreCallbackBool firestoreCallbackBool) {
 
         db.collection("Requests").add(mapNewRequest)
