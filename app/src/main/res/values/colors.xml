@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+
+    <color name="hueso">#ebe6ea</color>
+    <color name="rosaclaro">#e4c5c4</color>
+    <color name="beige">#c8ad8d</color>
+    <color name="verdemil">#6f7357</color>
+    <color name="verdemilosc">#273a2d</color>
+    <color name="osc">#505050</color>
+</resources>

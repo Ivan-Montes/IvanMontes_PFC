@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Array used on shared preferences -->
+    <string-array name="profile_privacy">
+        <item>@string/priv</item>
+        <item>@string/cont</item>
+        <item>@string/pub</item>
+    </string-array>
+
+    <!-- Array used on shared preferences -->
+    <string-array name="profile_privacy_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="warning_titles">
+        <item>@string/hot_warn</item>
+        <item>@string/fire_warn</item>
+        <item>@string/rain_warn</item>
+        <item>@string/water_warn</item>
+    </string-array>
+
+    <integer-array name="warning_img_int">
+        <item>@drawable/hightemperature</item>
+        <item>@drawable/forestfire</item>
+        <item>@drawable/rain</item>
+        <item>@drawable/wateroutage</item>
+    </integer-array>
+
+</resources>

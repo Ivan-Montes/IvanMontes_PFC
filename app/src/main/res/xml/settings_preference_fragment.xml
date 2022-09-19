@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory  android:title="@string/gen">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="dark_mode"
+            android:title="@string/mod_osc"
+            app:summary="@string/testing" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_preference_1"
+            android:title="@string/mail_alert" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="suggs"
+            android:title="@string/suggs" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="polls"
+            android:title="@string/polls" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="filtcont"
+            android:title="@string/filter_cont" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="actbeta"
+            android:summary="@string/act_beta_txt"
+            android:title="@string/act_beta" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/priva">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/profile_privacy"
+            android:entryValues="@array/profile_privacy_values"
+            android:key="profile_priv"
+            android:summary="@string/press"
+            android:title="@string/profile_priv" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="anuncios"
+            android:title="@string/anuncios" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="cesiondatos"
+            android:title="@string/cesion_datos" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

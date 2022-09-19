@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.profiletabs.ProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="255dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="16dp"
+            android:autofillHints="@string/email_txt"
+            android:drawableStart="@android:drawable/ic_dialog_email"
+            android:drawablePadding="7dp"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:maxLength="30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etCity"
+            android:layout_width="255dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="16dp"
+            android:autofillHints="@string/loc_txt"
+            android:drawableStart="@android:drawable/ic_menu_myplaces"
+            android:drawablePadding="7dp"
+            android:editable="false"
+            android:ems="10"
+            android:enabled="true"
+            android:focusable="false"
+            android:hint="@string/loc"
+            android:inputType="none"
+            android:maxLength="30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="255dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="16dp"
+            android:autofillHints="@string/phone_txt"
+            android:drawableStart="@android:drawable/ic_menu_call"
+            android:drawablePadding="7dp"
+            android:editable="false"
+            android:ems="10"
+            android:enabled="true"
+            android:focusable="false"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:maxLength="9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etCity" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
