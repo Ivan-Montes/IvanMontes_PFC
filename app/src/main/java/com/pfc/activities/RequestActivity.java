@@ -117,6 +117,7 @@ public class RequestActivity extends AppCompatActivity {
                     rq.setDescription(doc.getString("Description"));
                     rq.setLocation(doc.getGeoPoint("Location"));
                     rq.setCreationDate(doc.getTimestamp("CreationDate"));
+                    rq.setMail(doc.getString("Mail"));
                     return rq;
                 })
                 //.filter(Request::isStatus)
@@ -287,6 +288,7 @@ public class RequestActivity extends AppCompatActivity {
                     String title = bundle.getString("title");
                     String descrip = bundle.getString("descrip");
                     String requestor = FirebaseAuth.getInstance().getUid();
+                    String mail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
                     boolean checkTitle = Checkers.checkRequestTitle(title);
                     boolean checkDescrip = Checkers.checkRequestDescription(descrip);
@@ -302,6 +304,7 @@ public class RequestActivity extends AppCompatActivity {
                         mapNewRequest.put("Location", ubik);
                         mapNewRequest.put("CreationDate", new Timestamp(new Date()));
                         mapNewRequest.put("Status", true);
+                        mapNewRequest.put("Mail",mail);
 
 
                         Objects.requireNonNull(DbLittleHelperFactory

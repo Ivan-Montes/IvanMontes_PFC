@@ -14,18 +14,9 @@ public class Request {
     private String description;
     private String idDoc;
     private Timestamp creationDate;
+    private String mail;
 
     public Request() {
-    }
-
-    public Request(String requestor, boolean status, GeoPoint location, String title, String description, String idDoc, Timestamp creationDate) {
-        this.requestor = requestor;
-        this.status = status;
-        this.location = location;
-        this.title = title;
-        this.description = description;
-        this.idDoc = idDoc;
-        this.creationDate = creationDate;
     }
 
     public String getRequestor() {
@@ -80,6 +71,14 @@ public class Request {
 
     public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     @NonNull

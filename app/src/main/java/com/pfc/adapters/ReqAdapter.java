@@ -31,6 +31,7 @@ public class ReqAdapter extends RecyclerView.Adapter<ReqAdapter.ViewHolder>{
         private final TextView tvReqStatusLabel;
         private final TextView tvStatus;
         private final ImageView ivReqImg;
+        private final TextView tvMail;
 
         public ViewHolder(View v) {
             super(v);
@@ -39,6 +40,7 @@ public class ReqAdapter extends RecyclerView.Adapter<ReqAdapter.ViewHolder>{
             tvReqStatusLabel = v.findViewById(R.id.tvReqStatusLabel);
             tvStatus = v.findViewById(R.id.tvReqStatus);
             ivReqImg = v.findViewById(R.id.ivReqImg);
+            tvMail = v.findViewById(R.id.tvMail);
 
             //v.setOnClickListener(v1 -> Log.e(TAG, "Element " + getAdapterPosition() + " clicked."));
         }
@@ -58,6 +60,10 @@ public class ReqAdapter extends RecyclerView.Adapter<ReqAdapter.ViewHolder>{
         public TextView getTvReqStatusLabel() {
             return tvReqStatusLabel;
         }
+
+        public TextView getTvMail() {
+            return tvMail;
+        }
     }
 
     @NonNull
@@ -73,6 +79,7 @@ public class ReqAdapter extends RecyclerView.Adapter<ReqAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull ReqAdapter.ViewHolder holder, int position) {
         holder.getTvTitle().setText(listReq.get(position).getTitle());
         holder.getTvReqStatusLabel().setText(holder.itemView.getContext().getResources().getString(R.string.status));
+        holder.getTvMail().setText(listReq.get(position).getMail());
 
         String active = holder.itemView.getContext().getResources().getString(R.string.active);
         String inactive = holder.itemView.getContext().getResources().getString(R.string.inactive);
