@@ -7,9 +7,11 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -22,6 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.stream.Collectors;
 
 
 public class FireDbLittleHelper implements DbLittleHelper{
@@ -74,43 +80,69 @@ public class FireDbLittleHelper implements DbLittleHelper{
 
     @Override
     public void deleteUser(@NonNull FirebaseUser user, FirestoreCallbackBool firestoreCallbackBool) {
-        user.delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            deleteRestUserData(user);
-                            firestoreCallbackBool.onCallback(true);
-                        }else{
-                            firestoreCallbackBool.onCallback(false);
-                        }
-                    }
-                });
+        //I´ve created a latch because my session was erases before I could eliminate all user's documents. That shows up an error related to security/rules database document .
+        CountDownLatch latch = new CountDownLatch(2);
+        deleteU(user,firestoreCallbackBool,latch);
+        deleteUD(user,latch);
+        deleteUR(user,latch);
     }
 
-    public void changePassword(@NonNull FirebaseUser user, String newPass, FirestoreCallbackBool firestoreCallbackBool) {
-        user.updatePassword(newPass)
-                .addOnCompleteListener( (t) -> firestoreCallbackBool.onCallback(t.isSuccessful()));
+    private void deleteU(FirebaseUser user, FirestoreCallbackBool firestoreCallbackBool, CountDownLatch latch){
+        new Thread(() -> {
 
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            user.delete()
+                        .addOnCompleteListener(task -> firestoreCallbackBool.onCallback(task.isSuccessful()));
+
+
+        }).start();
     }
 
-    @Override
-    public void deleteRestUserData(FirebaseUser user) {
+    private void deleteUD(FirebaseUser user, CountDownLatch latch){
+        new Thread(() -> {
 
-        if ( user.getEmail() != null && !user.getEmail().isEmpty() ){
             DocumentReference docRef = FirebaseFirestore.getInstance()
                     .collection("Users")
-                    .document(user.getEmail());
+                    .document(Objects.requireNonNull(user.getEmail()));
             docRef.delete()
                     .addOnCompleteListener( (t) -> {
                         if (t.isSuccessful()){
-                            Log.e(TAG,"deleteRestUserData isSuccessful true");
+                            Log.w(TAG,"deleteRestUserData isSuccessful true");
                         }else{
-                            Log.e(TAG,"deleteRestUserData isSuccessful false");
+                            Log.w(TAG,"deleteRestUserData isSuccessful false");
                         }
+                        latch.countDown();
                     });
-        }
 
+        }).start();
+    }
+
+    private void deleteUR(FirebaseUser user, CountDownLatch latch){
+        new Thread(() -> FirebaseFirestore.getInstance()
+                .collection("Requests")
+                .whereEqualTo("Requestor", user.getUid())
+                .get()
+                .addOnCompleteListener( t -> {
+                    if (t.isSuccessful()) {
+                        for (DocumentSnapshot documentSnapshot:t.getResult()){
+                            //Log.w(TAG, documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                            documentSnapshot.getReference().delete();
+                        }
+                    }
+                    latch.countDown();
+                }
+                )).start();
+    }
+
+    @Override
+    public void changePassword(@NonNull FirebaseUser user, String newPass, FirestoreCallbackBool firestoreCallbackBool) {
+        user.updatePassword(newPass)
+                .addOnCompleteListener( (t) -> firestoreCallbackBool.onCallback(t.isSuccessful()));
 
     }
 
@@ -123,8 +155,8 @@ public class FireDbLittleHelper implements DbLittleHelper{
                     .document(user.getEmail());
 
             docRef.update("Avatar", downloadUrl )
-                    .addOnSuccessListener( l -> Log.e(TAG, "addAvatarDownloadLink OnComplete true"))
-                    .addOnFailureListener( e -> Log.e(TAG,"addAvatarDownloadLink addOnFailureListener true"));
+                    .addOnSuccessListener( l -> Log.w(TAG, "addAvatarDownloadLink OnComplete true"))
+                    .addOnFailureListener( e -> Log.w(TAG,"addAvatarDownloadLink addOnFailureListener true"));
         }
 
     }

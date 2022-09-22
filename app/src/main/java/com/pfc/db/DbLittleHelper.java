@@ -17,7 +17,6 @@ public interface DbLittleHelper {
      void updatePhone(String mail, String phone, FirestoreCallbackBool callback);
      void deleteUser(FirebaseUser user, FirestoreCallbackBool firestoreCallbackBool);
      void changePassword(FirebaseUser user, String newPass, FirestoreCallbackBool firestoreCallbackBool);
-     void deleteRestUserData(FirebaseUser user);
      void addAvatarDownloadLink(FirebaseUser user, Uri downloadUrl);
      void getCollection(String collection, FirestoreCallbackListCollection callback);
      void getCollectionWarn(String collection, FirestoreCallbackListCollection callback);
