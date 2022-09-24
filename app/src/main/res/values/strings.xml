@@ -95,4 +95,6 @@
     <string name="descrip_tag">Etiqueta de campo descripción</string>
     <string name="id" translatable="false">Id</string>
     <string name="pickphoto_txt">Boton para tomar una foto de avatar</string>
+    <string name="activarp">Activar Petición</string>
+    <string name="desactivarp">Desactivar Petición</string>
 </resources>

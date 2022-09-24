@@ -80,10 +80,10 @@ public class MapActivity extends AppCompatActivity {
         MapView map = findViewById(R.id.mvMap);
         map.setMultiTouchControls(true);
         map.setTilesScaledToDpi(true);
-
+        //Here you decide the initial point, it would be possible to get the phone location
         GeoPoint startPoint = new GeoPoint( Constants.GUADA_LAT, Constants.GUADA_LON );
         IMapController mapController = map.getController();
-        mapController.setZoom(12d);
+        mapController.setZoom(10d);
         mapController.setCenter(startPoint);
 
         Marker startMarker = new Marker(map);
@@ -105,7 +105,8 @@ public class MapActivity extends AppCompatActivity {
 //https://github.com/MKergall/osmbonuspack/wiki/Tutorial_2
     private void addMyPoints(MapView map, List<Request> listRequest){
 
-        Thread th = new Thread(() -> {
+        new Thread(() -> {
+
             FolderOverlay poiMarkers = new FolderOverlay();
             map.getOverlays().add(poiMarkers);
             Drawable icon = AppCompatResources.getDrawable(getApplicationContext(),R.drawable.poi_green);
@@ -129,9 +130,8 @@ public class MapActivity extends AppCompatActivity {
                 poiMarkers.add(poiMarker);
             }
             map.invalidate();
-        });
 
-        th.start();
+        }).start();
     }
 
     private List<Request> prepareMeTheList(@NonNull List<QueryDocumentSnapshot> listResult) {

@@ -328,6 +328,14 @@ public class RequestActivity extends AppCompatActivity {
                                 getResources().getString(R.string.requirement_fail));
                     }
                 });
+
+        getSupportFragmentManager()
+                .setFragmentResultListener(DetailRequestFragment.TAG,this,(requestKey, bundle) -> {
+                    if(bundle.getBoolean("wasaaaap")){
+                            reloadList();
+                    }
+                });
+
     }
 
     private void reloadList() {

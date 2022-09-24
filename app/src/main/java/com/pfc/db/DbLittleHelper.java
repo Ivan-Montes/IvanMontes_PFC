@@ -1,6 +1,7 @@
 package com.pfc.db;
 
 import android.net.Uri;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.pfc.support.FirestoreCallbackBool;
@@ -21,5 +22,6 @@ public interface DbLittleHelper {
      void getCollection(String collection, FirestoreCallbackListCollection callback);
      void getCollectionWarn(String collection, FirestoreCallbackListCollection callback);
      void addRequest(Map<String, Object> mapNewRequest, FirestoreCallbackBool callback);
+     void changeRequestStatus(String tvIdDoc, Boolean status, FirestoreCallbackBool callback);
 
 }

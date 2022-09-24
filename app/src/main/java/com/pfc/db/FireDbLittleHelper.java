@@ -3,18 +3,15 @@ package com.pfc.db;
 
 import android.net.Uri;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.pfc.pojos.User;
 import com.pfc.support.FirestoreCallbackBool;
 import com.pfc.support.FirestoreCallbackListCollection;
@@ -24,10 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.CyclicBarrier;
-import java.util.stream.Collectors;
 
 
 public class FireDbLittleHelper implements DbLittleHelper{
@@ -166,19 +160,16 @@ public class FireDbLittleHelper implements DbLittleHelper{
 
         db.collection(collection)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<QueryDocumentSnapshot> listResult = new ArrayList<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                listResult.add(document);
-                            }
-                            callback.onCallback(listResult);
-                        } else {
-                            Log.e(TAG, Objects.requireNonNull(task.getException()).getMessage()
-                                    + " : " + task.getException().getCause());
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<QueryDocumentSnapshot> listResult = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            listResult.add(document);
                         }
+                        callback.onCallback(listResult);
+                    } else {
+                        Log.e(TAG, Objects.requireNonNull(task.getException()).getMessage()
+                                + " : " + task.getException().getCause());
                     }
                 });
     }
@@ -207,6 +198,17 @@ public class FireDbLittleHelper implements DbLittleHelper{
     public void addRequest(Map<String, Object> mapNewRequest, FirestoreCallbackBool firestoreCallbackBool) {
 
         db.collection("Requests").add(mapNewRequest)
+                .addOnSuccessListener( r -> firestoreCallbackBool.onCallback(true))
+                .addOnFailureListener( r -> firestoreCallbackBool.onCallback(false));
+
+    }
+
+    @Override
+    public void changeRequestStatus(String tvIdDoc, Boolean status, FirestoreCallbackBool firestoreCallbackBool) {
+
+        db.collection("Requests")
+                .document(tvIdDoc)
+                .update("Status",status)
                 .addOnSuccessListener( r -> firestoreCallbackBool.onCallback(true))
                 .addOnFailureListener( r -> firestoreCallbackBool.onCallback(false));
 

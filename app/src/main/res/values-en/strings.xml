@@ -90,4 +90,6 @@
     <string name="location">Location</string>
     <string name="descrip_tag">Description tag</string>
     <string name="pickphoto_txt">Pick photo button</string>
+    <string name="desactivarp">Disable request</string>
+    <string name="activarp">Enable request</string>
 </resources>

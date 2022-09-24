@@ -55,29 +55,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDetailTitleTag" />
 
     <TextView
-        android:id="@+id/tvDetailRequestor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:autofillHints="@string/requestor_txt"
-        android:hint="@string/requestor"
-        android:textColorHint="#757575"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDetailRequestorTag" />
-
-    <TextView
-        android:id="@+id/tvDetailRequestorTag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/requestor"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvIdDoc" />
-
-    <TextView
         android:id="@+id/tvDetailTitleTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -86,7 +63,7 @@
         android:text="@string/title"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDetailRequestor" />
+        app:layout_constraintTop_toBottomOf="@+id/tvIdDoc" />
 
     <TextView
         android:id="@+id/tvDetailCreationDateTag"
@@ -172,4 +149,14 @@
         android:textColorHint="#757575"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvIdDocTag" />
+
+    <Button
+        android:id="@+id/btSetStatusR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/desactivarp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>
