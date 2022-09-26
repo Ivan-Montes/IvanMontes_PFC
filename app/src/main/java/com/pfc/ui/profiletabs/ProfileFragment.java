@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.pfc.R;
 import com.pfc.db.DbLittleHelper;
@@ -26,6 +27,7 @@ public class ProfileFragment extends Fragment {
 
     private final String email;
     private View viewFragment;
+    private ProgressBar progressBarProfile;
 
     public ProfileFragment(String email){
         this.email = email;
@@ -39,7 +41,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewFragment = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        progressBarProfile = viewFragment.findViewById(R.id.progressBarProfile);
         init();
 
         return viewFragment;
@@ -64,6 +66,7 @@ public class ProfileFragment extends Fragment {
             db.getUser(email, new FirestoreCallbackUser() {
                 @Override
                 public void onCallback(User user) {
+                    progressBarProfile.setVisibility(View.GONE);
                     EditText etCity = viewFragment.findViewById(R.id.etCity);
                     etCity.setText(user.getCity() );
                     EditText etPhone = viewFragment.findViewById(R.id.etPhone);
@@ -93,7 +96,6 @@ public class ProfileFragment extends Fragment {
         DialogFragRequestSimpleData df = new DialogFragRequestSimpleData();
         df.setArguments(bPack);
         df.show(getChildFragmentManager(), DialogFragRequestSimpleData.TAG);
-
     }
 
     private void requestNewInputValueForPhone(){
@@ -106,9 +108,7 @@ public class ProfileFragment extends Fragment {
         DialogFragRequestSimpleData df = new DialogFragRequestSimpleData();
         df.setArguments(bPack);
         df.show(getChildFragmentManager(), DialogFragRequestSimpleData.TAG);
-
     }
-
 
     private void manageResultsFromChildFragments(){
 

@@ -19,7 +19,7 @@ public class ProfileTabFragmentFactory {
                 return new ProfileFragment(email);
 
             case SETTINGSFRAGMENT:
-                return new SettingsFragment(email);
+                return new SettingsFragment();
 
             case SESIONFRAGMENT:
                 return new SesionFragment();

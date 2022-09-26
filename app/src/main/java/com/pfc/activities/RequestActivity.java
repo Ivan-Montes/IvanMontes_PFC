@@ -6,7 +6,9 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,6 +54,7 @@ public class RequestActivity extends AppCompatActivity {
     private String email;
     private GeoPoint ubik;
     private static final String TAG = "RequestActivity";
+    private ProgressBar progressBarReq;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,7 @@ public class RequestActivity extends AppCompatActivity {
         if (b != null) {
             email = b.getString("Email", "The Void");
         }
-
+        progressBarReq = findViewById(R.id.progressBarReq);
         init();
     }
 
@@ -128,6 +131,7 @@ public class RequestActivity extends AppCompatActivity {
     }
 
     private void showMeTheList(List<Request> listReq) {
+        progressBarReq.setVisibility(View.GONE);
         //Consumer as interface listener
         Consumer<Request> consumerReq = r -> new DetailRequestFragment(r).show(getSupportFragmentManager(), TAG);
         ReqAdapter reqAdapter = new ReqAdapter(listReq,consumerReq);

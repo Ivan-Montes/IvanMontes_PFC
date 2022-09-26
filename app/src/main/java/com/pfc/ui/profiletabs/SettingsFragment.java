@@ -12,14 +12,6 @@ import com.pfc.R;
 
 public class SettingsFragment extends Fragment {
 
-
-    private final String email;
-    private View viewFragment;
-
-    public SettingsFragment(String email){
-        this.email = email;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +19,7 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        viewFragment = inflater.inflate(R.layout.fragment_settings, container, false);
+        View viewFragment = inflater.inflate(R.layout.fragment_settings, container, false);
 
         init();
 
@@ -43,8 +35,6 @@ public class SettingsFragment extends Fragment {
                 .beginTransaction()
                 .replace(R.id.flExtra, new SettingsPreferenceFragment())
                 .commit();
-
     }
-
 
 }//End

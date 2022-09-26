@@ -46,6 +46,26 @@ import java.util.UUID;
 public class ProfileActivity extends AppCompatActivity {
 
     private String email = "";
+    //Field for pickPhoto() where the photo is saved
+    private Uri imageUri;
+    //Launcher and Callback for photo intent
+    private final ActivityResultLauncher<Intent> startCamera = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK) {
+
+                        if (imageUri != null){
+                            ImageView ivAvatar = findViewById(R.id.ivAvatar);
+                            ivAvatar.setImageURI(imageUri);
+                            ivAvatar.setAdjustViewBounds(true);
+                            uploadAvatarToFirebase();
+                            saveAvatarLocalPathInSharedPref(imageUri);
+                        }
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +82,12 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         init();
-
     }
 
     private void init(){
         confNavBottonInProfileActivity();
         eventPhotoOnClick();
         confTabs();
-        //downAvatarFromFirebaseToMem();
         DoIHaveAnAvatar();
     }
 
@@ -130,7 +148,6 @@ public class ProfileActivity extends AppCompatActivity {
                 }
                 break;
         }
-
     }
 
     /*
@@ -176,26 +193,6 @@ public class ProfileActivity extends AppCompatActivity {
                                                     Constants.COD_REQUEST_ARRAY_PERMISSION_AVATAR);
         }
     }
-    //Field for pickPhoto() where the photo is saved
-    private Uri imageUri;
-    //Launcher and Callback for photo intent
-    ActivityResultLauncher<Intent> startCamera = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == RESULT_OK) {
-
-                        if (imageUri != null){
-                            ImageView ivAvatar = findViewById(R.id.ivAvatar);
-                            ivAvatar.setImageURI(imageUri);
-                            ivAvatar.setAdjustViewBounds(true);
-                            uploadAvatarToFirebase();
-                            saveAvatarLocalPathInSharedPref(imageUri);
-                        }
-                    }
-                }
-            });
 
     private void saveAvatarLocalPathInSharedPref(@NonNull Uri imageUri){
         SharedPreferences sharedPreferences = getSharedPreferences(email,MODE_PRIVATE);

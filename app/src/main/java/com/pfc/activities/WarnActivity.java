@@ -2,6 +2,8 @@ package com.pfc.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class WarnActivity extends AppCompatActivity {
 
     private String email = "";
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +38,8 @@ public class WarnActivity extends AppCompatActivity {
             email = b.getString("Email","The Void");
 
         }
-
-       init();
+        progressBar = findViewById(R.id.progressBarWarn);
+        init();
 
     }
 
@@ -103,7 +106,7 @@ public class WarnActivity extends AppCompatActivity {
     }
 
     private void showWarningList(List<Warning> listWarn){
-
+        progressBar.setVisibility(View.GONE);
         WarnAdapter warnAdapter = new WarnAdapter(listWarn);
         RecyclerView rvWarn = findViewById(R.id.rvWarn);
         rvWarn.setLayoutManager(new LinearLayoutManager(this));

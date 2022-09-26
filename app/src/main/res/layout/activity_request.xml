@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".activities.RequestActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBarReq"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="245dp"
+        android:layout_marginBottom="378dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rvReq"
+        app:layout_constraintEnd_toEndOf="@+id/rvReq"
+        app:layout_constraintStart_toStartOf="@+id/rvReq"
+        app:layout_constraintTop_toTopOf="@+id/rvReq" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvReq"
         android:layout_width="0dp"

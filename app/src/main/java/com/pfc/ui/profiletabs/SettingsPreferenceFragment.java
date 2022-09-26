@@ -1,8 +1,10 @@
 package com.pfc.ui.profiletabs;
 
 import android.os.Bundle;
-import com.pfc.R;
+
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.pfc.R;
 
 public class SettingsPreferenceFragment extends PreferenceFragmentCompat {
     //https://www.geeksforgeeks.org/how-to-implement-preferences-settings-screen-in-android/
@@ -14,9 +16,8 @@ public class SettingsPreferenceFragment extends PreferenceFragmentCompat {
     }
 
    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {}
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
-
-
+   }
 
 }//End
