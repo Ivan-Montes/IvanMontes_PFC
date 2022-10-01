@@ -1,26 +1,23 @@
 package com.pfc.ui.profiletabs;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import androidx.fragment.app.Fragment;
+
 import com.pfc.R;
 import com.pfc.db.DbLittleHelper;
 import com.pfc.db.DbLittleHelperFactory;
-import com.pfc.pojos.User;
-import com.pfc.support.FirestoreCallbackUser;
 import com.pfc.support.Checkers;
 import com.pfc.ui.popups.DialogFragBox;
 import com.pfc.ui.popups.DialogFragRequestSimpleData;
 import com.pfc.ui.popups.Pop;
+
+import java.util.Objects;
 
 
 public class ProfileFragment extends Fragment {
@@ -63,15 +60,12 @@ public class ProfileFragment extends Fragment {
 
             DbLittleHelper db = DbLittleHelperFactory.getDbLittleHelper(DbLittleHelperFactory.FIRE);
             assert db != null;
-            db.getUser(email, new FirestoreCallbackUser() {
-                @Override
-                public void onCallback(User user) {
-                    progressBarProfile.setVisibility(View.GONE);
-                    EditText etCity = viewFragment.findViewById(R.id.etCity);
-                    etCity.setText(user.getCity() );
-                    EditText etPhone = viewFragment.findViewById(R.id.etPhone);
-                    etPhone.setText(user.getPhone() );
-                }
+            db.getUser(email, user -> {
+                progressBarProfile.setVisibility(View.GONE);
+                EditText etCity = viewFragment.findViewById(R.id.etCity);
+                etCity.setText(user.getCity() );
+                EditText etPhone = viewFragment.findViewById(R.id.etPhone);
+                etPhone.setText(user.getPhone() );
             });
         }
     }
@@ -113,32 +107,29 @@ public class ProfileFragment extends Fragment {
     private void manageResultsFromChildFragments(){
 
         getChildFragmentManager()
-                .setFragmentResultListener("etCity", this, new FragmentResultListener() {
-                    @Override
-                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                        String newValue = bundle.getString("newData");
-                        String oldValue = bundle.getString("oldValue");
-                        boolean checkValue = checkCityForInsertDB(newValue, oldValue);
+                .setFragmentResultListener("etCity", this, (requestKey, bundle) -> {
+                    String newValue = bundle.getString("newData");
+                    String oldValue = bundle.getString("oldValue");
+                    boolean checkValue = checkCityForInsertDB(newValue, oldValue);
 
-                        if ( checkValue ){
+                    if ( checkValue ){
 
-                            DbLittleHelperFactory
-                                    .getDbLittleHelper(DbLittleHelperFactory.FIRE)
-                                    .updateCity(email, newValue, bool -> {
+                        Objects.requireNonNull(DbLittleHelperFactory
+                                        .getDbLittleHelper(DbLittleHelperFactory.FIRE))
+                                .updateCity(email, newValue, bool -> {
 
-                                        if (bool){
-                                            new DialogFragBox(getResources().getString(R.string.info),
-                                                    getResources().getString(R.string.succ))
-                                                    .show(getChildFragmentManager(), DialogFragBox.TAG);
+                                    if (bool){
+                                        new DialogFragBox(getResources().getString(R.string.info),
+                                                getResources().getString(R.string.succ))
+                                                .show(getChildFragmentManager(), DialogFragBox.TAG);
 
-                                            EditText etCity = viewFragment.findViewById(R.id.etCity);
-                                            etCity.setText(newValue);
-                                        }else{
-                                            Pop.showPopMsg(requireActivity().getApplicationContext(),
-                                                    getResources().getString(R.string.proc_error_txt));
-                                        }
-                                    });
-                        }
+                                        EditText etCity = viewFragment.findViewById(R.id.etCity);
+                                        etCity.setText(newValue);
+                                    }else{
+                                        Pop.showPopMsg(requireActivity().getApplicationContext(),
+                                                getResources().getString(R.string.proc_error_txt));
+                                    }
+                                });
                     }
                 });
 
@@ -149,8 +140,8 @@ public class ProfileFragment extends Fragment {
 
                     if(Checkers.checkPhone(newValue) && !newValue.equals(oldValue)){
 
-                        DbLittleHelperFactory
-                                .getDbLittleHelper(DbLittleHelperFactory.FIRE)
+                        Objects.requireNonNull(DbLittleHelperFactory
+                                        .getDbLittleHelper(DbLittleHelperFactory.FIRE))
                                 .updatePhone(email, newValue, bool -> {
 
                                     if (bool){

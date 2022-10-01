@@ -28,6 +28,4 @@ public class ProfileTabFragmentFactory {
                 return null;
         }
     }
-
-
 }

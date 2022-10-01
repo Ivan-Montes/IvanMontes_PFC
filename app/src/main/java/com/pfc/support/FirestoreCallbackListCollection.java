@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface FirestoreCallbackListCollection {
 
-    public void onCallback(List<QueryDocumentSnapshot> listResult);
+    void onCallback(List<QueryDocumentSnapshot> listResult);
 }

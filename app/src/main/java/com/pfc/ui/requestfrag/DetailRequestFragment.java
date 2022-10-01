@@ -14,11 +14,12 @@ import androidx.fragment.app.DialogFragment;
 
 import com.pfc.R;
 import com.pfc.db.DbLittleHelperFactory;
-import com.pfc.db.FireDbLittleHelper;
 import com.pfc.pojos.Request;
 import com.pfc.support.FirestoreCallbackBool;
 import com.pfc.support.Tools;
 import com.pfc.ui.popups.Pop;
+
+import java.util.Objects;
 
 public class DetailRequestFragment extends DialogFragment {
 
@@ -62,7 +63,7 @@ public class DetailRequestFragment extends DialogFragment {
             dismissAllowingStateLoss();
         };
 
-        btSetStatus.setOnClickListener( l -> DbLittleHelperFactory.getDbLittleHelper(1)
+        btSetStatus.setOnClickListener( l -> Objects.requireNonNull(DbLittleHelperFactory.getDbLittleHelper(1))
                         .changeRequestStatus(request.getIdDoc(), !request.isStatus(), callbackBool));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());

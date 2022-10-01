@@ -2,15 +2,12 @@ package com.pfc.ui.profiletabs;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -76,8 +73,8 @@ public class SesionFragment extends Fragment {
         FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (fbUser != null){
-            DbLittleHelperFactory
-                    .getDbLittleHelper(DbLittleHelperFactory.FIRE)
+            Objects.requireNonNull(DbLittleHelperFactory
+                            .getDbLittleHelper(DbLittleHelperFactory.FIRE))
                     .deleteUser(fbUser, bool -> {
                         if(bool){
                             Pop.showPopMsg(requireContext(),getResources().getString(R.string.succ));
@@ -111,16 +108,13 @@ public class SesionFragment extends Fragment {
     private void manageResultsFromChildFragments() {
 
         getChildFragmentManager()
-                .setFragmentResultListener("btChPass", this, new FragmentResultListener() {
-                    @Override
-                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                        String newValue = bundle.getString("newData");
-                        if (Checkers.checkPass(newValue)) {
-                            changePassword(newValue);
-                        }
-                        else{
-                            Pop.showPopMsg(requireActivity(),getResources().getString(R.string.requirement_fail));
-                        }
+                .setFragmentResultListener("btChPass", this, (requestKey, bundle) -> {
+                    String newValue = bundle.getString("newData");
+                    if (Checkers.checkPass(newValue)) {
+                        changePassword(newValue);
+                    }
+                    else{
+                        Pop.showPopMsg(requireActivity(),getResources().getString(R.string.requirement_fail));
                     }
                 });
     }

@@ -3,7 +3,6 @@ package com.pfc.db;
 
 import android.net.Uri;
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 

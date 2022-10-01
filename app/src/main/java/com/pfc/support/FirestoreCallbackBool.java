@@ -2,5 +2,5 @@ package com.pfc.support;
 
 public interface FirestoreCallbackBool {
 
-    public void onCallback (Boolean bool);
+    void onCallback(Boolean bool);
 }

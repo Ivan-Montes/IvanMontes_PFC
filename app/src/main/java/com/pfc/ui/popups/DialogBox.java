@@ -14,9 +14,7 @@ public class DialogBox {
         AlertDialog.Builder b = new AlertDialog.Builder(context);
         b.setMessage(R.string.log_error_txt)
                 .setTitle(R.string.log_error)
-                .setPositiveButton(R.string.acep, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
+                .setPositiveButton(R.string.acep, (dialog, id) -> {
                 });
         AlertDialog d = b.create();
         d.show();

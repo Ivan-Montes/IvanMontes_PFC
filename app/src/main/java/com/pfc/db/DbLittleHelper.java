@@ -1,7 +1,6 @@
 package com.pfc.db;
 
 import android.net.Uri;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.pfc.support.FirestoreCallbackBool;

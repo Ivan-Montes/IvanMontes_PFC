@@ -8,13 +8,10 @@ import java.util.regex.Pattern;
 public class Checkers {
 
     public static boolean checkEmail(String email){
-
-        //
         String regEx = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
         Pattern pattern = Pattern.compile(regEx);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches() && email.length() <= 30;
-
     }
 
     public static boolean checkPass(@NonNull String pass){

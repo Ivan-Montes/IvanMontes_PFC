@@ -84,46 +84,24 @@ public class Warning {
 
         public WarningBuilder(){}
 
-        public WarningBuilder setActivo(boolean activo) {
-            this.activo = activo;
-            return this;
-        }
+        public WarningBuilder setActivo(boolean activo) {this.activo = activo;return this;}
 
-        public WarningBuilder setFechaInicio(Timestamp fechaInicio) {
-            this.fechaInicio = fechaInicio;
-            return this;
-        }
+        public WarningBuilder setFechaInicio(Timestamp fechaInicio) {this.fechaInicio = fechaInicio;return this;}
 
-        public WarningBuilder setFechaFin(Timestamp fechaFin) {
-            this.fechaFin = fechaFin;
-            return this;
-        }
+        public WarningBuilder setFechaFin(Timestamp fechaFin) {this.fechaFin = fechaFin;return this;}
 
-        public WarningBuilder setLugar(String lugar) {
-            this.lugar = lugar;
-            return this;
-        }
+        public WarningBuilder setLugar(String lugar) {this.lugar = lugar;return this;}
 
-        public WarningBuilder setNivel(long nivel) {
-            this.nivel = nivel;
-            return this;
-        }
+        public WarningBuilder setNivel(long nivel) {this.nivel = nivel;return this;}
 
-        public WarningBuilder setTipo(long tipo) {
-            this.tipo = tipo;
-            return this;
-        }
+        public WarningBuilder setTipo(long tipo) {this.tipo = tipo;return this;}
 
-        public WarningBuilder setIdDoc(String idDoc) {
-            this.idDoc = idDoc;
-            return this;
-        }
+        public WarningBuilder setIdDoc(String idDoc) {this.idDoc = idDoc;return this;}
 
         public Warning build(){
             return new Warning(this);
         }
 
     }//End WarningBuilder class
-
 
 }//End Warning class

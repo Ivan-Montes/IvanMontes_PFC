@@ -1,7 +1,6 @@
 package com.pfc.ui.popups;
 
 import android.app.Dialog;
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,14 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import com.pfc.R;
-import com.pfc.activities.ProfileActivity;
-
 public class DialogFragBox extends DialogFragment {
 
     public static String TAG = "DialogFragBox";
-    private String message;
-    private String title;
+    private final String message;
+    private final String title;
 
 
     public DialogFragBox(String title, String message) {

@@ -12,13 +12,6 @@ public class User {
     public User() {
     }
 
-    public User(String email, String city, String phone, String avatar) {
-        this.email = email;
-        this.city = city;
-        this.phone = phone;
-        this.avatar = avatar;
-    }
-
     public String getEmail() {
         return email;
     }

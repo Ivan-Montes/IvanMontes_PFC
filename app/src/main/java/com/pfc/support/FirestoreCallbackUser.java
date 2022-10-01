@@ -4,5 +4,5 @@ import com.pfc.pojos.User;
 
 public interface FirestoreCallbackUser {
 
-    public void onCallback(User user);
+    void onCallback(User user);
 }

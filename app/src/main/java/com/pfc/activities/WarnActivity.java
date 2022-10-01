@@ -99,7 +99,7 @@ public class WarnActivity extends AppCompatActivity {
                             .setTipo(tipo)
                             .setIdDoc(doc.getId())
                             .build();
-                }).filter(w->w.isActivo())
+                }).filter(Warning::isActivo)
                 .collect(Collectors.toList());
 
         showWarningList(listWarn);
