@@ -86,7 +86,7 @@
         android:id="@+id/btRegistrar"
         android:layout_width="255dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="50dp"
         android:text="@string/reg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +96,7 @@
         android:id="@+id/tvAuth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="15dp"
         android:text="@string/login"
         android:textColor="@color/beige"
         android:textSize="16sp"
@@ -107,8 +107,8 @@
 
     <ImageView
         android:id="@+id/ivLogoReg"
-        android:layout_width="133dp"
-        android:layout_height="118dp"
+        android:layout_width="109dp"
+        android:layout_height="91dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/img_logo"
         app:layout_constraintEnd_toEndOf="parent"
