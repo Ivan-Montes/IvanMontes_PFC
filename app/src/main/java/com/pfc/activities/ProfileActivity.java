@@ -263,7 +263,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (usu != null && usu.getAvatar() != null && !usu.getAvatar().isEmpty() ){
             String donloadLink = usu.getAvatar();
             StorageReference httpsReference = storage.getReferenceFromUrl(donloadLink);
-            httpsReference.getBytes(Constants.ONE_MEGABYTE).addOnSuccessListener(bytes -> {
+            httpsReference.getBytes(Constants.ONE_MEGABYTE * 10).addOnSuccessListener(bytes -> {
                 if (bytes.length > 0){
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                     ImageView ivAvatar = findViewById(R.id.ivAvatar);
